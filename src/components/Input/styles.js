@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     display: flex;
-    width: 80vw;
+    width: 90vw;
     background-color: aliceblue;
     justify-content: center;
     min-height: 3rem;
@@ -17,7 +17,7 @@ export const Container = styled.div`
 
     > textarea{
         width: 80%;
-         border: none; 
+        border: none; 
         font-size: 1.2rem;
         padding: 1rem 0 1rem 0;
         border-radius: 5px;

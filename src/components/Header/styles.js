@@ -21,17 +21,12 @@ export const Options = styled.ul`
     > li{
         list-style: none;
         margin-left: 3rem;
-        > a{
-            font-size: 2rem;
-            color: red;
-            text-decoration: none;
-            color: aliceblue;
-            transition: 0.5s;
-        }
-
-        >a:hover{
-            color: red;
-        }
+        font-size: 2rem;
+        color: red;
+        text-decoration: none;
+        color: aliceblue;
+        transition: 0.5s;
+        cursor: pointer;
     }
 
     @media (max-width: 760px) {

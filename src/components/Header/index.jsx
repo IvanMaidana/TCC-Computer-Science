@@ -3,8 +3,9 @@ import { Container, Options, Mobile } from "./styles";
 import Logo from "../../assets/logo.png";
 import { TiThMenu } from "react-icons/ti";
 
-export function Header() {
+export function Header({ onOptionChange }) {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("content");
 
     useEffect(() => {
         // Ativa o menu automaticamente se a tela for >= 760px ao carregar
@@ -31,22 +32,39 @@ export function Header() {
         };
     }, []);
 
+    const handOptionClick = (option) => {
+        if (selectedOption === option) return;
+        setSelectedOption(option);
+        onOptionChange(option); // Envia a opção selecionada para o componente pai (ou Chat)
+    }
+
     return (
         <Container>
             <Mobile>
                 <img src={Logo} alt="logo site" />
-                <TiThMenu 
-                    id="iconMenu" 
-                    size={34} 
+                <TiThMenu
+                    id="iconMenu"
+                    size={34}
                     onClick={() => {
                         setMenuOpen(!menuOpen);
-                    }} 
+                    }}
                 />
             </Mobile>
             {menuOpen && (
                 <Options>
-                    <li><a href="#content">Conteúdo</a></li>
-                    <li><a href="#map">Mapa Mental</a></li>
+                    <li
+                        onClick={() => handOptionClick("content")}
+                        style={{ color: selectedOption === "content" ? "red" : "aliceblue", }}
+                    >
+                        Conteúdo
+                    </li>
+
+                    <li
+                        onClick={() => handOptionClick("mindmap")}
+                        style={{ color: selectedOption === "mindmap" ? "red" : "aliceblue", }}
+                    >
+                        Mapa Mental
+                    </li>
                 </Options>
             )}
         </Container>

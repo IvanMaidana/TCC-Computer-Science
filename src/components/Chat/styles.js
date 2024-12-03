@@ -5,7 +5,7 @@ export const ChatContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 70%;
+    max-width: 80%;
     height: 75vh;
     margin: 0 auto;
     background-color: #3c6975;
@@ -22,7 +22,7 @@ export const MessagesContainer = styled.div`
     /* background-color: #ffffff; */
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 `;
 
 // Estilo para a bolha de mensagem
@@ -34,4 +34,18 @@ export const MessageBubble = styled.div`
     max-width: 90%;
     align-self: ${({ sender }) => (sender === "user" ? "flex-end" : "flex-start")};
     word-wrap: break-word;
+
+
+    /* overflow: hidden; 
+    display: flex; 
+    flex-direction: column; */
+    
+`;
+
+
+export const MindMapHidden = styled.div`
+    height: 400px;
+    width: 400px;
+    background-color: aliceblue;
+    display: none;
 `;

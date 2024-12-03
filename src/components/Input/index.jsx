@@ -17,10 +17,11 @@ export function Input({ onSend }){
     }
 
     const handleSend = () => {
-        console.log(message)
         if(message.trim()){
             onSend(message); // Envia a mensagem para o componente pai
             setMessage(""); // Limpa o campo de texto após o envio
+            const textarea = textareaRef.current;
+            textarea.style.height = "4rem"; // Redefine a altura para o valor inicial
         }
     }
 
@@ -38,6 +39,7 @@ export function Input({ onSend }){
                         handleSend();
                     }
                 }}
+                
                 required/>
             <button id="send" onClick={handleSend}>
                 <RiSendPlaneLine id="search" />
