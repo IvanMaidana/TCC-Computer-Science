@@ -12,6 +12,7 @@ export const ChatContainer = styled.div`
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin-bottom: 7rem;
 `;
 
 // Container das mensagens
@@ -34,18 +35,5 @@ export const MessageBubble = styled.div`
     max-width: 90%;
     align-self: ${({ sender }) => (sender === "user" ? "flex-end" : "flex-start")};
     word-wrap: break-word;
-
-
-    /* overflow: hidden; 
-    display: flex; 
-    flex-direction: column; */
     
-`;
-
-
-export const MindMapHidden = styled.div`
-    height: 400px;
-    width: 400px;
-    background-color: aliceblue;
-    display: none;
 `;

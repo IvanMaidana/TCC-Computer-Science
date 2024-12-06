@@ -10,7 +10,6 @@ export function Input({ onSend }){
         const textarea = textareaRef.current;
         textarea.style.height = "4rem"
         const scrollHeight = e.target.scrollHeight;
-        // Limite máximo em rem (15rem = 150px quando 1rem = 10px)
         const maxHeight = 15 * 10;
         textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
         setMessage(e.target.value);// Atualiza o estado com a mensagem

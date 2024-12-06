@@ -11,7 +11,7 @@ export const Container = styled.div`
     border-radius: 15px;
     margin: 0 auto;
     position: absolute;
-    bottom: 4rem;
+    bottom: 2rem;
     left: 0;
     right: 0;
 
@@ -27,8 +27,6 @@ export const Container = styled.div`
         
     }
 
-
-
     > button{
         width: 15%;
         font-size: 20px;
@@ -43,12 +41,4 @@ export const Container = styled.div`
             cursor: pointer;
         }
     }
-
-    /* 
-     
-    border: none;
-    
-    padding: 1rem;
-    font-size: 1.5rem; */
-
 `;

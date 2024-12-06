@@ -17,12 +17,20 @@ export default [
         sourceType: 'module',
       },
     },
+
+
     settings: { react: { version: '18.3' } },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
+
+    env: {
+    browser: true,
+    node: true, // Habilita o suporte ao Node.js
+    es2021: true
+  },
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,

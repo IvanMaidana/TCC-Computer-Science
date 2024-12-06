@@ -1,24 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "../Input";
-import { ChatContainer, MessagesContainer, MessageBubble, MindMapHidden } from "./styles";
+import { ChatContainer, MessagesContainer, MessageBubble } from "./styles";
 import { getContent } from "../../ContentService";
-
-import { Markmap } from "markmap-view";
-import { Transformer } from "markmap-lib";
-
-
-const mapa = `
-    # Título Principal
-    ## Subtítulo
-    - Item 1
-    - Item 2
-`;
+import { MindMapViewer } from "../MindMap"; // Importa o novo componente
 
 
 export function Chat({ selectedOption }) {
     const [messages, setMessages] = useState([]); // Estado para armazenar as mensagens
     const [pendingRequest, setPendingRequest] = useState(null); // Dados pendentes para a API
-    const divRef = useRef(null);
 
     // Hook para lidar com a chamada da API
     useEffect(() => {
@@ -40,24 +29,7 @@ export function Chat({ selectedOption }) {
 
     // Função para tratar mapas mentais
     const handleMindMap = (data) => {
-        
-        
-        const transformer = new Transformer();
-    
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute("width", "400");
-        svg.setAttribute("height", "400");
-
-        divRef.current.appendChild(svg);
-
-        const mm = Markmap.create(svg);
-        const { root } = transformer.transform(mapa);
-        mm.setData(root);
-        mm.fit();
-
-        // Abre uma nova guia e insere o SVG
-        console.log(svg);
-        openSvgInNewTab(svg);
+        openMindMapViewer(data);
 
         setMessages((prevMessages) => [
             ...prevMessages,
@@ -65,25 +37,23 @@ export function Chat({ selectedOption }) {
         ]);
     };
 
-    // Função para abrir o SVG em uma nova guia
-    const openSvgInNewTab = (svg) => {
-        const newWindow = window.open("", "_blank");
+    // Função para abrir o componente de mapa mental em uma nova guia
+    const openMindMapViewer = (markdown) => {
+
+        const newWindow = window.open("", "_blank", "width=1280,height=720");
         if (newWindow) {
-            const svgHtml = `
-                <html>
-                    <head>
-                        <title>Mapa Mental</title>
-                    </head>
-                    <body>
-                        <div style="text-align:center; margin-top: 20px;">
-                            ${svg}
-                            <h1>teste</h1>
-                        </div>
-                    </body>
-                </html>
-            `;
-            newWindow.document.write(svgHtml);
-            newWindow.document.close();
+            newWindow.document.title = "Mapa Mental";
+
+            // Renderiza o componente React na nova guia
+            const rootDiv = newWindow.document.createElement("div");
+            newWindow.document.body.appendChild(rootDiv);
+
+            // Renderiza o MindMapViewer com o conteúdo Markdown
+            import("react-dom").then((ReactDOM) => {
+                ReactDOM.createRoot(rootDiv).render(
+                    <MindMapViewer markdown={markdown} />
+                );
+            });
         } else {
             console.error("Não foi possível abrir uma nova aba.");
         }
@@ -126,7 +96,6 @@ export function Chat({ selectedOption }) {
                 ))}
             </MessagesContainer>
             <Input onSend={handleSendMessage} />
-            <MindMapHidden ref={divRef}/>
         </ChatContainer>
     );
 }
