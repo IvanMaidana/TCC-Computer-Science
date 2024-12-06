@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// const apiKey = import.meta.env.VITE_API_KEY;
-const apiKey = ${{secret.VITE_API_KEY}}
+const apiKey = import.meta.env.VITE_API_KEY;
+
 
 if (!apiKey) {
     throw new Error("API Key is missing. Ensure VITE_API_KEY is set in your .env file.");
